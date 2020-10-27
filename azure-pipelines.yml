@@ -61,22 +61,22 @@ stages:
           - task: KubernetesManifest@0
             displayName: Create imagePullSecret
             inputs:
-              action: createSecret
-              secretName: $(imagePullSecret)
-              dockerRegistryEndpoint: 'Container Registry Connection'
+              action: 'createSecret'
               kubernetesServiceConnection: 'Kubernetes Cluster Connection'
               namespace: 'default'
+              secretType: 'dockerRegistry'
+              secretName: '$(imagePullSecret)'
+              dockerRegistryEndpoint: 'acr-conn'
           - task: KubernetesManifest@0
             displayName: Deploy to Kubernetes cluster
             inputs:
-              action: deploy
-              kubernetesServiceConnection: 'Kubernetes Cluster Connection'
+              action: 'deploy'
+              kubernetesServiceConnection: 'aks-conn'
               namespace: 'multicontainer'
               manifests: |
                 $(Pipeline.Workspace)/manifests/deployment.yml
                 $(Pipeline.Workspace)/manifests/service.yml
-              imagePullSecrets: |
-                $(imagePullSecret)
               containers: |
                 $(RegistryName)/$(webRepository):$(tag)
                 $(RegistryName)/$(leaderboardRepository):$(tag)
+              imagePullSecrets: '$(imagePullSecret)'
