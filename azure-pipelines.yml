@@ -62,7 +62,7 @@ stages:
             displayName: Create imagePullSecret
             inputs:
               action: 'createSecret'
-              kubernetesServiceConnection: 'Kubernetes Cluster Connection'
+              kubernetesServiceConnection: 'aks-conn'
               namespace: 'default'
               secretType: 'dockerRegistry'
               secretName: '$(imagePullSecret)'
