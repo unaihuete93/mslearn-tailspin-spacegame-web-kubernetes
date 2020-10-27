@@ -63,7 +63,7 @@ stages:
             inputs:
               action: 'createSecret'
               kubernetesServiceConnection: 'aks-conn'
-              namespace: 'default'
+              namespace: 'multicontainer'
               secretType: 'dockerRegistry'
               secretName: '$(imagePullSecret)'
               dockerRegistryEndpoint: 'acr-conn'
