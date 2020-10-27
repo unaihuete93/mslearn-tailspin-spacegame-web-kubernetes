@@ -23,7 +23,7 @@ stages:
         containerRegistry: 'acr-conn'
         repository: '$(webRepository)'
         command: 'buildAndPush'
-        Dockerfile: '**/Dockerfile'
+        dockerfile: '$(Build.SourcesDirectory)/Tailspin.SpaceGame.Web/Dockerfile'
         buildContext: '$(Build.Repository.LocalPath)'
         tags: '$(tag)'
     
@@ -33,7 +33,7 @@ stages:
         containerRegistry: 'acr-conn'
         repository: '$(leaderboardRepository)'
         command: 'buildAndPush'
-        Dockerfile: '**/Dockerfile'
+        dockerfile: '$(Build.SourcesDirectory)/Tailspin.SpaceGame.LeaderboardContainer/Dockerfile'
         buildContext: '$(Build.Repository.LocalPath)'
         tags: '$(tag)'
     
